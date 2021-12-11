@@ -22,6 +22,4 @@ public interface BacSyRepo extends JpaRepository<BacSy, Integer> {
     List<BacSy> findBacSyByIsDelete(boolean isDelete);
     @Query(value = "CALL get_salary_doctor(:did, :sdate, :edate);", nativeQuery = true)
     public List<Float> tinhLuongBacSy(@RequestParam("did") int did, @RequestParam("sdate") Date sdate, @RequestParam("edate") Date edate);
-
-
 }

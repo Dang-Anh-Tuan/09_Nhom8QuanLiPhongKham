@@ -63,7 +63,7 @@ public class YTaServiceImp implements YTaService{
 
     @Override
     public List<YtaLuong> tinhLuongYta(Date sdate, Date edate) {
-        List<YTa> listYta = yTaRepo.findAll();
+        List<YTa> listYta = findAll();
         List<YtaLuong> listYtaLuong = new ArrayList<>();
         for(YTa yta:listYta){
             YtaLuong ytaLuong = new YtaLuong();

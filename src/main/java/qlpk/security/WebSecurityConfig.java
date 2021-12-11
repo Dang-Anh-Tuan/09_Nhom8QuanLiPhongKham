@@ -52,6 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // cho phép dùng các resource
                 .antMatchers("/resources/**", "/img/**", "/css/**", "/js/**").permitAll()
                 .antMatchers("/qlns/**").hasAuthority(Role.ADMIN.getType())
+                .antMatchers("/bacsi/**").hasAuthority(Role.BACSY.getType())
+                .antMatchers("/yta/**").hasAuthority(Role.YTA.getType())
                 .antMatchers(HttpMethod.POST, "/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/*").permitAll()
                 .anyRequest().authenticated()
