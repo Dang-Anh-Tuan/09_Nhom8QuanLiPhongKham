@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{https://cdn.jsdelivr.net/npm/tail.select@0.5.15/css/bootstrap4/tail.select-success.css}">
+<div th:replace="fragments/general.html :: html_head(type='tag')"></div>
+<link rel="stylesheet" th:href="@{/css/admin/thongtinbenhan.css}">
+<link rel="stylesheet" th:href="@{/css/admin/khambenh.css}">
+<link rel="stylesheet" th:href="@{/css/admin/select-form.css}">
+</head>
+<body>
+	<div th:replace="fragments/general.html :: menu"></div>
+	<div class="grid__full-width">
+		<div class="grid__row">
+			<div th:replace="fragments/bacsi.html :: sidebar_bacsi"></div>
+			<form class="grow-full" method="post">
+				<h3 class="phieu-heading">Phiếu khám bệnh</h3>
+				<div th:replace="fragments/bacsiyta.html :: thong_tin_benh_an"></div>
+
+				<p class="phieu-sub-heading ml-24">Kết quả khám bệnh</p>
+				<div class="ml-24">
+					<div th:replace="fragments/bacsi.html :: select_benh_bacsi"></div>
+				</div>
+
+				<div
+					class="grid__row grid__row--item-center content-item-center mt-32">
+					<input type="submit" class="btn btn--primary add-form__btn"
+						value="Lưu kết quả khám" />
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script th:src="@{https://code.jquery.com/jquery-3.4.1.slim.min.js}"></script>
+	<script
+		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
+	<script
+		th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+	<script
+		th:src="@{https://cdn.jsdelivr.net/npm/tail.select@0.5.15/js/tail.select-full.min.js}"></script>
+	<script th:inline="javascript">
+    	tail.select('#select1', {
+            search: true,
+            deselect:true,
+        })
+        document.querySelector(".select-label .label-inner").innerText = "Chọn danh sách bệnh";
+	</script>
+</body>
+</html>

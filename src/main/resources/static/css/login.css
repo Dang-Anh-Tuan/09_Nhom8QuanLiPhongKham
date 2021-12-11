@@ -1,0 +1,32 @@
+.container-login-page{
+    position: relative;
+    right: 0;
+    left: 0;
+    height: calc(100vh - 86px);
+    background: url('../img/BackgroundLoginPage.png');
+    background-repeat: no-repeat;
+    background-position-y: -120px;
+}
+
+
+.login-form{
+    position: absolute;
+    width: 400px;
+    height: 550px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 5px 0px 5px #ccc;
+}
+
+.form-container-heading{
+    text-align: center;
+}
+
+.login-icon-container{
+    width: 40px;
+    position: relative;
+    top: 43px;
+    left: -15px;
+}

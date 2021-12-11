@@ -1,0 +1,88 @@
+.nav-bar {
+  height: 86px;
+  background: linear-gradient(
+    -90deg,
+    rgba(88, 182, 145, 1),
+    rgba(88, 182, 145, 0.73)
+  );
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 80px;
+}
+
+.nav-bar__logo {
+  color: var(--white-color);
+  font-size: 2.4rem;
+}
+
+.nav-bar__user {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor:pointer;
+}
+
+.user__contain-avatar {
+  background-image: url("https://s3-ap-southeast-1.amazonaws.com/images.spiderum.com/sp-images/e9fef2d083cf11ea8f996dbfbe6e50b1.jpg");
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: contain;
+}
+
+.user__name,
+.user__btn-extra {
+  margin-left: 12px;
+  font-size: 1.8rem;
+  color: var(--white-color);
+}
+
+.user__btn-extra {
+  position: relative;
+  top: -5px;
+}
+
+.user__sub-nav::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  background-color: transparent;
+  top: -30px;
+}
+.user__sub-nav {
+  display: none;
+  position: absolute;
+  top: calc(100% + 17px);
+  right: 0;
+  width: 100%;
+  box-shadow: 10px 10px 15px #ccc;
+  border: solid 1px;
+  border-color: transparent var(--primary-color) var(--primary-color)
+    var(--primary-color);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.user__logout-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 1.6rem;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: ease-in-out 0.3s;
+}
+
+.user__logout-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.nav-bar__user:hover .user__sub-nav{
+    display: block;
+}

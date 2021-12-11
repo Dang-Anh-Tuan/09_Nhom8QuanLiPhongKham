@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="html_head(type)" th:remove="${type}">
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet"
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css}"
+	integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" th:href="@{/css/base.css}" />
+<link rel="stylesheet" th:href="@{/css/grid.css}" />
+<link rel="stylesheet" th:href="@{/css/admin/admin-header.css}">
+<link rel="stylesheet" th:href="@{/css/admin/admin-sidebar.css}">
+
+</head>
+<body>
+
+
+	<!--  ----------------------SIDEBAR Bac Si ----------------------- -->
+	<div th:fragment="sidebar_bacsi">
+		<div class="side-bar-container">
+			<ul class="side-bar-list-btn">
+				<li class="side-bar-item"><img class="side-bar-item__icon-img"
+					th:src="@{/img/icon-doctor.png}" alt=""> <a
+					class="side-bar-item__link" th:href="@{/bacsi/list-benhan}">Danh
+						sách bệnh án</a></li>
+			</ul>
+		</div>
+	</div>
+
+
+	<!--  ---------------------- END SIDEBAR SIDEBAR Y Ta ----------------------- -->
+
+
+	<!--  ---------------------- List Benh An Bac Si----------------------- -->
+	<div th:fragment="list_benhan_bacsi" th:remove="tag">
+		<div class="container-list-entity grow-full" th:object="${listBenhAn}">
+			<p class="list-entity-heading">Danh Sách Bệnh Án</p>
+			<div class="grid__full-width table-list">
+				<div
+					class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+					<div class="grid__col-lg-1 table-list__th table-list__cell">STT</div>
+					<div class="grid__col-lg-2 table-list__th table-list__cell">Mã
+						Bệnh Án</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Họ
+						tên</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">CMT</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">SĐT</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Ngày
+						khám</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Hành
+						động</div>
+				</div>
+				<th:block th:each="benhan, state : ${listBenhAn}">
+					<div
+						class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+						<div class="grid__col-lg-1 table-list__cell"
+							th:utext="${state.count}"></div>
+						<div class="grid__col-lg-2 table-list__cell"
+							th:utext="${benhan.id}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${benhan.getBenhNhan().getTen()}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${benhan.getBenhNhan().getCmt()}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${benhan.getBenhNhan().getSdt()}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${benhan.ngayKham}"></div>
+						<div class="grid__col-lg-3 table-list__cell">
+							<div class="grid__row grid__row--item-center"
+								style="margin-left: 26px !important;">
+								<a th:if="${benhan.getIdBenh()!=null}" th:href="@{'/bacsi/xembenhan/' + ${benhan.id}}"
+									class="table-list__cell-link"><i
+									class="fas fa-eye table-list__cell-icon table-list__cell-icon--edit"></i>
+								</a>
+								<a th:href="@{'/bacsi/khambenh/' + ${benhan.id}}"
+									class="table-list__cell-link"> <img
+									class="side-bar-item__icon-img" th:src="@{/img/ongnghe.jpg}"
+									alt="" style="margin-left: 6px !important;">
+									</a> 
+									<a th:if="${benhan.getDsDonThuoc()==null}"
+									th:href="@{'/bacsi/kedon/' + ${benhan.id}}"
+									class="table-list__cell-link"> <img
+									class="side-bar-item__icon-img"
+									th:src="@{/img/icon-medicine.png}" alt=""
+									style="margin-left: 6px !important;"></a>
+									 <a th:if="${benhan.getDsDonThuoc()!=null}"
+									th:href="@{'/bacsi/xemdonthuoc/' + ${benhan.id}}"
+									class="table-list__cell-link"><i
+									class="fas fa-list-alt table-list__cell-icon table-list__cell-icon--edit"></i></a>
+
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<!--  ---------------------- END List Benh An Bac Si----------------------- -->
+
+
+
+	<!--  ---------------------- SELECT Benh Bac Si----------------------- -->
+
+	<div th:fragment="select_benh_bacsi">
+		<th:block th:object="${benhDanhSachBenh}">
+			<select name="" id="select1" class="select-box" th:field="*{idBenh}">
+				<th:block  th:each="item, state : ${benhDanhSachBenh.getDsBenh()}">
+					<option class="select-option" th:value="${item.getId()}"
+						th:text="${item.getTenBenh()}"></option>
+				</th:block>
+			</select>
+		</th:block>
+	</div>
+
+
+	<!--  ---------------------- SELECT Benh Bac Si----------------------- -->
+
+
+
+	<!--  ---------------------- SELECT Thuoc Bac Si----------------------- -->
+
+	<div th:fragment="select_thuoc_bacsi" th:remove="tag">
+		<div class="container-add-medicine mt-16">
+			<div class="grid">
+				<div class="grid__row grid__row--item-center">
+					<div class="grid__col-lg-3">
+						<select name="" id="select-medicine" class="select-box">
+							<th:block th:object="${dsThuoc}"
+								th:each="item, state : ${dsThuoc}">
+								<option class="select-option" th:value="${item.id}"
+									th:text="${item.ten}"></option>
+							</th:block>
+						</select>
+					</div>
+					<div class="grid__col-lg-2">
+						<div class="grid__row grid__row--item-center">
+							<p class="text-font-16 mr-8">Số lượng</p>
+							<input id="amount" type="number"
+								class="input-width-100x40 text-font-16" value="0" min="0" />
+						</div>
+					</div>
+					<div class="grid__col-lg-3">
+						<div class="grid__row grid__row--item-center">
+							<p class="text-font-16 mr-8">Cách dùng</p>
+							<select name="" id="select-method-use" class="select-box">
+								<option class="select-option">Uống</option>
+								<option class="select-option">Tiêm</option>
+							</select>
+						</div>
+					</div>
+					<div class="grid__col-lg-1">
+						<button id="btn-add-medicine" class="btn btn--primary btn-sm"
+							style="height: 31.5px; display: flex; align-items: center; justify-content: center;">
+							<i class="fas fa-plus-circle btn-icon"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="grid__full-width table-list">
+				<div
+					class="
+            grid__row grid__row--spbw grid__row--item-center
+            table-list__row
+          ">
+					<div class="grid__col-lg-1 table-list__th table-list__cell">STT</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">
+						Tên thuốc</div>
+					<div class="grid__col-lg-2 table-list__th table-list__cell">
+						Liều dùng</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">
+						Cách dùng</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--  ---------------------- SELECT thuoc Bac Si----------------------- -->
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div th:replace="fragments/general.html :: html_head(type='tag')"></div>
+<link rel="stylesheet"
+	th:href="@{/css/admin/addForm.css}">
+</head>
+<body>
+	<div th:replace="fragments/general.html :: menu"></div>
+	<div class="grid__full-width">
+		<div class="grid__row">
+			<div th:replace="fragments/quanlynhansu.html :: sidebar_qlns" ></div>
+			<div th:replace="fragments/quanlynhansu.html :: add_edit_form_doctor_qlns(heading='Thêm bác sĩ')" ></div>
+		</div>
+	</div>
+</body>
+</html>

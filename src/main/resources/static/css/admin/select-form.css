@@ -1,0 +1,14 @@
+.select-label{
+    padding: 8px 12px;
+}
+
+.select-label,
+.dropdown-option,
+input.search-input,
+div.dropdown-search{
+    font-size: 1.6rem !important;
+}
+
+.tail-select .select-dropdown ul li.dropdown-option:before{
+    left: -4px !important;
+}

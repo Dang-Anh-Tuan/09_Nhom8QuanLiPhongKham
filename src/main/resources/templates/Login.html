@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css}"
+    />
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/admin-header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/addForm.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/admin-sidebar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+  </head>
+  <body>
+    <nav class="nav-bar" style="background: #0e121a !important">
+      <div class="nav-bar__logo">Logo</div>
+    </nav>
+    <div class="container-login-page">
+      <div class="login-form">
+        <div class="form-container-heading mt-8">
+          <img
+            th:src="@{img/HeadingLoginForm.png}"
+            alt=""
+            class="form-heading"
+          />
+        </div>
+        <div th:if="${param.error != null}" class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div>
+        <form th:action="@{/authenticateTheUser}" method="post" class="login-main-form pd-0-24">
+          <p class="login-label mt-32 form__field-heading"
+            style="font-size: 2rem; -webkit-user-select: none;">
+            Tên đăng nhập
+          </p>
+          <div class="login-icon-container">
+            <i class="fas fa-user side-bar-item__icon"></i>
+          </div>
+          <input
+            type="text"
+            class="login-input mt-8 form__field-input--text"
+            style="width: 340px; padding: 12px 16px 12px 45px"
+            name="username"
+          />
+          <p
+            class="login-label mt-32 form__field-heading"
+            style="font-size: 2rem; -webkit-user-select: none;"
+          >
+            Mật khẩu
+          </p>
+          <div class="login-icon-container">
+            <i class="fas fa-lock side-bar-item__icon"></i>
+          </div>
+          <input
+            type="password"
+            class="login-input mt-8 form__field-input--text"
+            style="width: 340px; padding: 12px 16px 12px 45px"
+            name="password"
+          />
+          <div class="grid mt-50">
+            <div class="grid__row" style="text-align: center">
+              <input
+                type="submit"
+                class="btn btn--primary btn-size-s btn--login"
+                value="Đăng nhập"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet"
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css}"
+	integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" th:href="@{/css/base.css}" />
+<link rel="stylesheet" th:href="@{/css/grid.css}" />
+<link rel="stylesheet" th:href="@{/css/admin/admin-header.css}">
+<link rel="stylesheet" th:href="@{/css/admin/admin-sidebar.css}">
+
+</head>
+
+<body>
+	<!--  ----------------------SIDEBAR QUAN LY NHAN SU ----------------------- -->
+	<div th:fragment="sidebar_qlns" th:remove="tag">
+		<div class="side-bar-container">
+			<ul class="side-bar-list-btn">
+				<li class="side-bar-item"><img class="side-bar-item__icon-img"
+					th:src="@{/img/icon-doctor.png}" alt=""> <a
+					class="side-bar-item__link" th:href="@{/qlns/bacsi/ds-bacsi}">Xem
+						danh sách bác sĩ</a></li>
+				<li class="side-bar-item"><i
+					class="fas fa-plus-circle side-bar-item__icon"></i> <a
+					class="side-bar-item__link" th:href="@{/qlns/bacsi/add}">Thêm
+						bác sĩ</a></li>
+				<li class="side-bar-item"><img class="side-bar-item__icon-img"
+					th:src="@{/img/icon-nurse.png}" alt=""> <a
+					class="side-bar-item__link" th:href="@{/qlns/yta/ds-yta}">Xem
+						danh sách y tá</a></li>
+				<li class="side-bar-item"><i
+					class="fas fa-plus-circle side-bar-item__icon"></i> <a
+					class="side-bar-item__link" th:href="@{/qlns/yta/add}">Thêm y
+						tá</a></li>
+				<li class="side-bar-item"><img class="side-bar-item__icon-img"
+					th:src="@{/img/icon-medicine.png}" alt=""> <a
+					class="side-bar-item__link" th:href="@{/qlns/thuoc/ds-thuoc}">Xem
+						danh sách thuốc</a></li>
+				<li class="side-bar-item"><i
+					class="fas fa-plus-circle side-bar-item__icon"></i> <a
+					class="side-bar-item__link" th:href="@{/qlns/thuoc/add}">Thêm
+						thuốc</a></li>
+				<li class="side-bar-item"><img class="side-bar-item__icon-img"
+					th:src="@{/img/benh.png}" alt=""> <a
+					class="side-bar-item__link" th:href="@{/qlns/benh/ds-benh}">Xem
+						danh sách bệnh</a></li>
+				<li class="side-bar-item"><i
+					class="fas fa-plus-circle side-bar-item__icon"></i> <a
+					class="side-bar-item__link" th:href="@{/qlns/benh/add}">Thêm
+						bệnh</a></li>
+				<li class="side-bar-item"><i
+					class="fas fa-money-check-alt side-bar-item__icon"></i> <a
+					class="side-bar-item__link" th:href="@{/qlns/xemluong-bs}">Xem lương 
+						bác sĩ</a></li>
+				<li class="side-bar-item"><i
+					class="fas fa-money-check-alt side-bar-item__icon"></i> <a
+					class="side-bar-item__link" th:href="@{/qlns/xemluong-yta}">Xem y lương 
+						tá</a></li>
+				<li class="side-bar-item"><i
+					class="fas fa-chart-pie side-bar-item__icon"></i> <a
+					class="side-bar-item__link" th:href="@{/qlns/thongkebenh}">Thống
+						kê các bệnh mắc nhiều</a></li>
+
+			</ul>
+		</div>
+	</div>
+
+
+	<!--  ---------------------- END SIDEBAR QUAN LY NHAN SU ----------------------- -->
+
+
+	<!--  ----------------------LIST DOCTOR QUAN LY NHAN SU ----------------------- -->
+	<div th:fragment="list_doctor_qlns" th:remove="tag">
+		<div class="container-list-entity grow-full">
+			<p class="list-entity-heading">Danh Sách Bác Sĩ</p>
+			<div class="ml-12 mt-24">
+				<input id="input-search" onchange="handleSearch()" type="text"
+					class="form__field-input--text" value=""
+					placeholder="Nhập thông tin tìm kiếm ..." />
+			</div>
+			<div class="grid__full-width table-list" th:object="${dsBacSi}">
+				<div
+					class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+					<div class="grid__col-lg-1 table-list__th table-list__cell">STT</div>
+					<div class="grid__col-lg-2 table-list__th table-list__cell">Mã
+						Bác Sĩ</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Họ
+						Tên</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">CMT</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Ngày
+						sinh</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Địa
+						chỉ</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Bậc
+						nghề</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Thâm
+						niên</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Trình
+						độ</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Chuyên
+						môn</div>
+					<div class="grid__col-lg-1 table-list__th table-list__cell">Hành
+						động</div>
+				</div>
+				<th:block th:each="bacsi, state : ${dsBacSi}">
+					<div
+						class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+						<div class="grid__col-lg-1 table-list__cell"
+							th:utext="${state.count}"></div>
+						<div class="grid__col-lg-2 table-list__cell"
+							th:utext="${bacsi.id}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${bacsi.ten}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${bacsi.cmt}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${#dates.format(bacsi.ngaySinh, 'dd/MM/yyyy')}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${bacsi.diaChi}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${bacsi.bacNghe}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${bacsi.thamNien}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${bacsi.trinhDo}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${bacsi.chuyenMon}"></div>
+						<div class="grid__col-lg-1 table-list__cell">
+							<div class="grid__row">
+								<a th:href="@{'/qlns/bacsi/edit/' + ${bacsi.id}}"
+									class="table-list__cell-link"><i
+									class="fas fa-edit table-list__cell-icon table-list__cell-icon--edit"></i></a>
+								<a th:href="@{'/qlns/bacsi/delete/' + ${bacsi.id}}"
+									class="table-list__cell-link"><i
+									class="fas fa-trash-alt table-list__cell-icon table-list__cell-icon--delete"></i></a>
+								<a th:href="@{'/qlns/benh-bacsi/' + ${bacsi.id}}"
+									class="table-list__cell-link"><i
+									class="fas fa-virus table-list__cell-icon table-list__cell-icon--edit"></i></a>
+							</div>
+						</div>
+					</div>
+				</th:block>
+
+			</div>
+		</div>
+
+	</div>
+
+	<!--  ---------------------- END LIST DOCTOR  QUAN LY NHAN SU ----------------------- -->
+
+	<!--  ----------------------LIST NURSE QUAN LY NHAN SU ----------------------- -->
+	<div th:fragment="list_nurse_qlns" th:remove="tag">
+		<div class="container-list-entity grow-full">
+			<p class="list-entity-heading">Danh Sách Y Tá</p>
+			<div class="ml-12 mt-24">
+				<input id="input-search" onchange="handleSearch()" type="text"
+					class="form__field-input--text" value=""
+					placeholder="Nhập thông tin tìm kiếm ..." />
+			</div>
+			<div class="grid__full-width table-list" th:object="${dsYTa}">
+				<div
+					class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+					<div class="grid__col-lg-1 table-list__th table-list__cell">STT</div>
+					<div class="grid__col-lg-2 table-list__th table-list__cell">Mã
+						Y Tá</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Họ
+						Tên</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">CMT</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Ngày
+						sinh</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Địa
+						chỉ</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">SĐT</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Thâm
+						niên</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Trình
+						độ</div>
+					<div class="grid__col-lg-1 table-list__th table-list__cell">Hành
+						động</div>
+				</div>
+
+				<th:block th:each="yTa, state : ${dsYTa}">
+					<div
+						class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+						<div class="grid__col-lg-1 table-list__cell"
+							th:utext="${state.count}"></div>
+						<div class="grid__col-lg-2 table-list__cell" th:utext="${yTa.id}"></div>
+						<div class="grid__col-lg-3 table-list__cell" th:utext="${yTa.ten}"></div>
+						<div class="grid__col-lg-3 table-list__cell" th:utext="${yTa.cmt}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${#dates.format(yTa.bd, 'dd/MM/yyyy')}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${yTa.diaChi}"></div>
+						<div class="grid__col-lg-3 table-list__cell" th:utext="${yTa.sdt}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${yTa.thamNien}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${yTa.trinhDo}"></div>
+						<div class="grid__col-lg-1 table-list__cell">
+							<div class="grid__row">
+								<a th:href="@{'/qlns/yta/edit/' + ${yTa.id}}"
+									class="table-list__cell-link"><i
+									class="fas fa-edit table-list__cell-icon table-list__cell-icon--edit"></i></a>
+								<a th:href="@{'/qlns/yta/delete/' + ${yTa.id}}"
+									class="table-list__cell-link"><i
+									class="fas fa-trash-alt table-list__cell-icon table-list__cell-icon--delete"></i></a>
+							</div>
+						</div>
+					</div>
+
+				</th:block>
+
+
+			</div>
+		</div>
+
+	</div>
+
+	<!--  ---------------------- END LIST NURSE   QUAN LY NHAN SU ----------------------- -->
+
+
+
+	<!--  ---------------------- FORM ADD NURSE EDIT NURSE  QUAN LY NHAN SU ----------------------- -->
+
+	<div th:fragment="add_edit_form_nurse_qlns(content)" th:remove="tag">
+		<form class="container-add-form grow-full" method="post"
+			th:object="${yTa}">
+			<p class="add-form__heading" th:text="${content}"></p>
+			<div class="grid__full-width add-form__form">
+
+				<div class="grid__row form__row">
+					<div class="form__field-container">
+						<p class="form__field-heading">Họ Tên</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{ten}">
+						<p class="error-msg" th:if="${#fields.hasErrors('ten')}"
+							th:errors="*{ten}"></p>
+					</div>
+					<div class="form__field-container">
+						<p class="form__field-heading">CMT</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{cmt}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('cmt')}"
+							th:errors="*{cmt}"></p>
+					</div>
+				</div>
+
+				<div class="grid__row form__row">
+					<div class="form__field-container">
+						<p class="form__field-heading">Ngày sinh (dd/MM/yyyy)</p>
+						<input type="date" class="form__field-input--text"
+							th:value="*{bd}" th:field="*{bd}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('bd')}"
+							th:errors="*{bd}"></p>
+					</div>
+					<div class="form__field-container">
+						<p class="form__field-heading">Địa chỉ</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{diaChi}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('diaChi')}"
+							th:errors="*{diaChi}"></p>
+					</div>
+				</div>
+
+				<div class="grid__row form__row">
+					<div class="form__field-container">
+						<p class="form__field-heading">SĐT</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{sdt}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('sdt')}"
+							th:errors="*{sdt}"></p>
+					</div>
+					<div class="form__field-container">
+						<p class="form__field-heading">Thâm niên</p>
+						<input type="number" class="form__field-input--text" value="0"
+							min="0" th:field="*{thamNien}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('thamNien')}"
+							th:errors="*{thamNien}"></p>
+					</div>
+				</div>
+				<div class="grid__row form__row">
+					<div class="form__field-container">
+						<p class="form__field-heading">Trình độ</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{trinhDo}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('trinhDo')}"
+							th:errors="*{trinhDo}"></p>
+					</div>
+				</div>
+				<div class="grid__row form__row" th:object="${taikhoan}">
+					<div th:if="${content=='Thêm y tá'}" class="form__field-container">
+						<p class="form__field-heading">Username</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{userName}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('userName')}"
+							th:errors="*{userName}"></p>
+					</div>
+					<div th:if="${content=='Thêm y tá'}" class="form__field-container">
+						<p class="form__field-heading">Password</p>
+						<input type="password" class="form__field-input--text"
+							th:field="*{password}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('password')}"
+							th:errors="*{password}"></p>
+					</div>
+				</div>
+
+			</div>
+			<div class="add-form__container-btn">
+				<input type="submit" class="btn btn--primary add-form__btn"
+					th:value="${content}" /> <a th:href="@{/qlns/yta/ds-yta}"
+					class="btn btn--border-primary add-form__btn">Quay lại</a>
+			</div>
+		</form>
+	</div>
+
+	<!--  ---------------------- END FORM NURSE   QUAN LY NHAN SU ----------------------- -->
+
+
+
+	<!--  ----------------------LIST MEDICINE QUAN LY NHAN SU ----------------------- -->
+	<div th:fragment="list_medicine_qlns" th:remove="tag">
+		<div class="container-list-entity grow-full" th:object="${listThuoc}">
+			<p class="list-entity-heading">Danh Sách Thuốc</p>
+			<div class="ml-12 mt-24">
+				<input id="input-search" onchange="handleSearch()" type="text"
+					class="form__field-input--text" value=""
+					placeholder="Nhập thông tin tìm kiếm ..." />
+			</div>
+			<div class="grid__full-width table-list">
+				<div
+					class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+					<div class="grid__col-lg-1 table-list__th table-list__cell">STT</div>
+					<div class="grid__col-lg-2 table-list__th table-list__cell">Mã
+						thuốc</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Tên
+						thuốc</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Giá
+						(VNĐ)</div>
+					<div class="grid__col-lg-1 table-list__th table-list__cell">Hành
+						động</div>
+				</div>
+				<th:block th:each="thuoc, state : ${listThuoc}">
+					<div
+						class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+						<div class="grid__col-lg-1 table-list__cell"
+							th:utext="${state.count}"></div>
+						<div class="grid__col-lg-2 table-list__cell"
+							th:utext="${thuoc.id}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${thuoc.ten}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${thuoc.gia}"></div>
+						<div class="grid__col-lg-1 table-list__cell">
+							<div class="grid__row">
+								<a th:href="${'/qlns/thuoc/edit/' + {thuoc.id}}"
+									class="table-list__cell-link"><i
+									class="fas fa-edit table-list__cell-icon table-list__cell-icon--edit"></i></a>
+
+								<a th:href="${'/qlns/thuoc/delete/' + {thuoc.id}}"
+									class="table-list__cell-link"><i
+									class="fas fa-trash-alt table-list__cell-icon table-list__cell-icon--delete"></i></a>
+							</div>
+						</div>
+					</div>
+				</th:block>
+
+
+			</div>
+		</div>
+
+	</div>
+	<!--  ---------------------- END LIST MEDICINE QUAN LY NHAN SU ----------------------- -->
+
+
+	<!--  ---------------------- FORM ADD DOCTOR  QUAN LY NHAN SU ----------------------- -->
+
+	<div th:fragment="add_edit_form_doctor_qlns(heading)" th:remove="tag">
+		<form class="container-add-form grow-full" method="post">
+			<p class="add-form__heading" th:text="${heading}"></p>
+			<div class="grid__full-width add-form__form" th:object="${bacsi}">
+
+				<div class="grid__row form__row">
+					<div class="form__field-container">
+						<p class="form__field-heading">Họ Tên</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{ten}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('ten')}"
+							th:errors="*{ten}"></p>
+					</div>
+					<div class="form__field-container">
+						<p class="form__field-heading">CMT</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{cmt}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('cmt')}"
+							th:errors="*{cmt}"></p>
+					</div>
+				</div>
+
+				<div class="grid__row form__row">
+					<div class="form__field-container">
+						<p class="form__field-heading">Ngày sinh</p>
+						<input type="date" class="form__field-input--text"
+							th:field="*{ngaySinh}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('ngaySinh')}"
+							th:errors="*{ngaySinh}"></p>
+					</div>
+					<div class="form__field-container">
+						<p class="form__field-heading">Địa chỉ</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{diaChi}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('diaChi')}"
+							th:errors="*{diaChi}"></p>
+					</div>
+				</div>
+
+				<div class="grid__row form__row">
+					<div class="form__field-container">
+						<p class="form__field-heading">Bậc nghề</p>
+						<select class="form__field-input--select" th:field="*{bacNghe}">
+							<option class="form__field-input--select-option" value="1">
+								Bậc 1</option>
+							<option class="form__field-input--select-option" value="2">
+								Bậc 2</option>
+							<option class="form__field-input--select-option" value="3">
+								Bậc 3</option>
+							<option class="form__field-input--select-option" value="4">
+								Bậc 4</option>
+							<option class="form__field-input--select-option" value="5">
+								Bậc 5</option>
+							<option class="form__field-input--select-option" value="6">
+								Bậc 6</option>
+							<option class="form__field-input--select-option" value="7">
+								Bậc 7</option>
+							<option class="form__field-input--select-option" value="8">
+								Bậc 8</option>
+							<option class="form__field-input--select-option" value="9">
+								Bậc 9</option>
+						</select>
+					</div>
+					<div class="form__field-container">
+						<p class="form__field-heading">Thâm niên</p>
+						<input type="number" class="form__field-input--text"
+							th:field="*{thamNien}" min="0" />
+						<p class="error-msg" th:if="${#fields.hasErrors('thamNien')}"
+							th:errors="*{thamNien}"></p>
+					</div>
+				</div>
+				<div class="grid__row form__row">
+					<div class="form__field-container">
+						<p class="form__field-heading">Trình độ</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{trinhDo}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('trinhDo')}"
+							th:errors="*{trinhDo}"></p>
+					</div>
+					<div class="form__field-container">
+						<p class="form__field-heading">Chuyên môn</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{chuyenMon}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('chuyenMon')}"
+							th:errors="*{chuyenMon}"></p>
+					</div>
+				</div>
+				<div class="grid__row form__row" th:object="${taikhoan}">
+					<div th:if="${heading =='Thêm bác sĩ'}"
+						class="form__field-container">
+						<p class="form__field-heading">Username</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{userName}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('userName')}"
+							th:errors="*{userName}"></p>
+					</div>
+					<div th:if="${heading =='Thêm bác sĩ'}"
+						class="form__field-container">
+						<p class="form__field-heading">Password</p>
+						<input type="password" class="form__field-input--text"
+							th:field="*{password}" />
+						<p class="error-msg" th:if="${#fields.hasErrors('password')}"
+							th:errors="*{password}"></p>
+					</div>
+				</div>
+			</div>
+			<div class="add-form__container-btn">
+				<input type="submit" class="btn btn--primary add-form__btn"
+					th:value="${heading}" /> <a th:href="@{/qlns/bacsi/ds-bacsi}"
+					class="btn btn--border-primary add-form__btn">Quay lại</a>
+			</div>
+		</form>
+	</div>
+
+	<!--  ---------------------- END FORM ADD EDIT DOCTOR  QUAN LY NHAN SU ----------------------- -->
+
+
+
+
+	<!--  ---------------------- FORM ADD EDit MEDICINE  QUAN LY NHAN SU ----------------------- -->
+
+	<div th:fragment="add_form_medicine_qlns(content)" th:remove="tag">
+		<form class="container-add-form grow-full" method="post"
+			th:object="${thuoc}">
+			<p class="add-form__heading" th:text="${content}"></p>
+			<div class="grid__full-width add-form__form">
+
+				<div class="grid__row form__row">
+					<div class="form__field-container">
+						<p class="form__field-heading">Tên thuốc</p>
+						<input type="text" class="form__field-input--text"
+							th:field="*{ten}" />
+						<p th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}"
+							class="error-msg"></p>
+					</div>
+					<div class="form__field-container">
+						<p class="form__field-heading">Giá thuốc (VNĐ)</p>
+						<input type="number" class="form__field-input--text" value="0"
+							min="0" th:field="*{gia}" />
+						<p th:if="${#fields.hasErrors('gia')}" th:errors="*{gia}"
+							class="error-msg"></p>
+					</div>
+				</div>
+
+				<div class="add-form__container-btn">
+					<input type="submit" class="btn btn--primary add-form__btn"
+						th:value="${content}" /> <a th:href="@{/qlns/thuoc/ds-thuoc}"
+						class="btn btn--border-primary add-form__btn">Quay lại</a>
+				</div>
+		</form>
+	</div>
+
+	<!--  ---------------------- END FORM MEDICINE DOCTOR  QUAN LY NHAN SU ----------------------- -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div th:replace="fragments/general.html :: html_head(type='tag')"></div>
+<link rel="stylesheet"
+	th:href="@{/css/admin/addForm.css}">
+</head>
+<body>
+	<div th:replace="fragments/general.html :: menu"></div>
+	<div class="grid__full-width">
+		<div class="grid__row">
+			<div th:replace="fragments/yta.html :: sidebar_yta" ></div>
+			<div th:replace="fragments/yta.html :: add_form_benhan_yta(content = 'Thêm bệnh án')" ></div>
+		</div>
+	</div>
+</body>
+</html>

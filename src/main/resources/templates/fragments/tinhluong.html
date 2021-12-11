@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="html_head(type)" th:remove="${type}">
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet"
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css}"
+	integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" th:href="@{/css/base.css}" />
+<link rel="stylesheet" th:href="@{/css/grid.css}" />
+<link rel="stylesheet" th:href="@{/css/admin/admin-header.css}">
+<link rel="stylesheet" th:href="@{/css/admin/admin-sidebar.css}">
+
+</head>
+<body>
+
+	<!--  ---------------------- FORM ADD EDit Benh  QUAN LY NHAN SU ----------------------- -->
+
+	<div th:fragment="select_date_tinhluong(content)" th:remove="tag">
+		<form class="container-add-form grow-full" method="post"
+			th:object="${dateLuong}">
+			<p class="add-form__heading" th:text="${content}"></p>
+			<div class="grid__full-width add-form__form">
+
+				<div class="grid__row form__row">
+					<div class="form__field-container">
+						<p class="form__field-heading">Ngày bắt đầu</p>
+						<input type="date" class="form__field-input--text"
+							th:field="*{ngayBD}" required/>
+					</div>
+					<div class="form__field-container">
+						<p class="form__field-heading">Ngày kết thúc</p>
+						<input type="date" class="form__field-input--text"
+							th:field="*{ngayKT}" required/>
+					</div>
+				</div>
+
+				<div class="add-form__container-btn">
+					<input type="submit" class="btn btn--primary add-form__btn"
+						th:value="${content}" /> <a th:href="@{/qlns/bacsi/ds-bacsi}"
+						class="btn btn--border-primary add-form__btn">Quay lại</a>
+				</div>
+		</form>
+	</div>
+
+	<!--  ---------------------- END FORM BENH  QUAN LY NHAN SU ----------------------- -->
+
+	<!--  ----------------------LIST KET QUA LUONG QUAN LY NHAN SU ----------------------- -->
+	<div th:fragment="kq_luong_bacsi_qlns" th:remove="tag">
+		<div class="container-list-entity grow-full" th:object="${dsBacSiLuong}">
+			<p class="list-entity-heading">Kết quả Lương</p>
+			<div class="ml-12 mt-24">
+				<input id="input-search" onchange="handleSearch()" type="text"
+					class="form__field-input--text" value=""
+					placeholder="Nhập thông tin tìm kiếm ..." />
+			</div>
+			<div class="grid__full-width table-list">
+				<div
+					class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+					<div class="grid__col-lg-1 table-list__th table-list__cell">STT</div>
+					<div class="grid__col-lg-2 table-list__th table-list__cell">Mã
+						bác sĩ</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Tên
+						bác sĩ</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Ngày
+						sinh</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Lương</div>
+				</div>
+				<th:block th:each="bacsi, state : ${dsBacSiLuong}">
+					<div
+						class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+						<div class="grid__col-lg-1 table-list__cell"
+							th:utext="${state.count}"></div>
+						<div class="grid__col-lg-2 table-list__cell"
+							th:utext="${bacsi.getBacSy().getId()}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${bacsi.getBacSy().getTen()}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${#dates.format(bacsi.getBacSy().getNgaySinh(), 'dd/MM/yyyy')}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${bacsi.getLuong()}"></div>
+					</div>
+				</th:block>
+
+
+			</div>
+		</div>
+
+	</div>
+	<!--  ---------------------- END LIST KET QUA LUONG QUAN LY NHAN SU --------------------- -->
+
+
+<!--  ----------------------LIST KET QUA LUONG Y TA QUAN LY NHAN SU ----------------------- -->
+	<div th:fragment="kq_luong_yta_qlns" th:remove="tag">
+		<div class="container-list-entity grow-full" th:object="${dsYTaLuong}">
+			<p class="list-entity-heading">Kết quả Lương</p>
+			<div class="ml-12 mt-24">
+				<input id="input-search" onchange="handleSearch()" type="text"
+					class="form__field-input--text" value=""
+					placeholder="Nhập thông tin tìm kiếm ..." />
+			</div>
+			<div class="grid__full-width table-list">
+				<div
+					class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+					<div class="grid__col-lg-1 table-list__th table-list__cell">STT</div>
+					<div class="grid__col-lg-2 table-list__th table-list__cell">Mã
+						y tá</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Tên
+						y tá</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Ngày
+						sinh</div>
+					<div class="grid__col-lg-3 table-list__th table-list__cell">Lương</div>
+				</div>
+				<th:block th:each="yta, state : ${dsYTaLuong}">
+					<div
+						class="grid__row grid__row--spbw grid__row--item-center table-list__row">
+						<div class="grid__col-lg-1 table-list__cell"
+							th:utext="${state.count}"></div>
+						<div class="grid__col-lg-2 table-list__cell"
+							th:utext="${yta.getYta().getId()}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${yta.getYta().getTen()}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${#dates.format(yta.getYta().getBd(), 'dd/MM/yyyy')}"></div>
+						<div class="grid__col-lg-3 table-list__cell"
+							th:utext="${yta.getLuong()}"></div>
+					</div>
+				</th:block>
+
+
+			</div>
+		</div>
+
+	</div>
+	<!--  ---------------------- END LIST KET QUA LUONG Y TA QUAN LY NHAN SU --------------------- -->
+
+
+
+
+
+</body>
+</html>

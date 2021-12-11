@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{https://cdn.jsdelivr.net/npm/tail.select@0.5.15/css/bootstrap4/tail.select-success.css}">
+<div th:replace="fragments/general.html :: html_head(type='tag')"></div>
+<link rel="stylesheet" th:href="@{/css/admin/thongtinbenhan.css}">
+<link rel="stylesheet" th:href="@{/css/admin/khambenh.css}">
+<link rel="stylesheet" th:href="@{/css/admin/admin-list-entity.css}">
+<link rel="stylesheet" th:href="@{/css/admin/select-form.css}">
+
+</head>
+<body>
+	<div th:replace="fragments/general.html :: menu"></div>
+	<div class="grid__full-width">
+		<div class="grid__row">
+			<div th:replace="fragments/bacsi.html :: sidebar_bacsi"></div>
+			<div class="grow-full">
+				<h3 class="phieu-heading">Đơn thuốc</h3>
+				<div th:replace="fragments/bacsiyta.html :: thong_tin_benh_an"></div>
+
+				<p class="phieu-sub-heading ml-24">Danh sách thuốc</p>
+				<div class="ml-24">
+					<div th:replace="fragments/bacsi.html :: select_thuoc_bacsi"></div>
+				</div>
+
+				<div
+					class="grid__row grid__row--item-center content-item-center mt-32 mb-32">
+					<button id="btn-create-donthuoc" class="btn btn--primary add-form__btn"
+						 data-toggle="modal" data-target="#myModal"
+					 >Xác nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- MODAL -->
+	<div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Thành công</h4>
+            <button type="button" class="close" data-dismiss="modal">   
+              &times;
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">Đã thêm đơn thuốc cho bệnh án</div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">
+              Xác nhận
+            </button>
+          </div>
+        </div>
+      </div>
+	<!-- END MODAL -->
+	<script th:src="@{https://code.jquery.com/jquery-3.4.1.slim.min.js}"></script>
+	<script
+		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
+	<script
+		th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+	<script
+		th:src="@{https://cdn.jsdelivr.net/npm/tail.select@0.5.15/js/tail.select-full.min.js}"></script>
+	<script src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+    <script src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <script src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js}"></script>	
+	<script th:src="@{/js/kedon.js}"></script>
+</body>
+</html>

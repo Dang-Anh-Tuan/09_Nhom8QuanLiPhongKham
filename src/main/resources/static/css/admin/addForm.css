@@ -1,0 +1,59 @@
+.add-form__heading {
+  margin-top: 16px;
+  margin-left: 16px;
+  font-size: 2.4rem;
+  color: var(--text-color);
+  font-weight: 500;
+  line-height: 2.4rem;
+}
+
+.add-form__form {
+  padding: 16px;
+}
+
+.form__row {
+  margin-left: 8px;
+  margin-top: 24px;
+}
+
+.form__field-container {
+  width: 30%;
+}
+
+.form__field-heading,
+.form__field-input--text {
+  font-size: 1.6rem;
+}
+
+.form__field-input--select,
+.form__field-input--text {
+  margin-top: 8px;
+  padding: 6px 12px;
+  font-size: 1.6rem;
+  outline: none;
+  border-radius: 5px;
+  border: solid 3px var(--primary-color);
+}
+
+.form__field-input--select-option {
+  font-size: 1.6rem;
+}
+
+[class^="form__field-input"] {
+  width: 300px;
+  height : 40px;
+}
+
+.add-form__container-btn {
+  width: 60%;
+  margin: 32px auto;
+  transform: translateX(-32px);
+}
+
+.add-form__btn {
+  text-decoration: none;
+}
+
+.add-form__btn:first-child {
+  margin-right: 16px;
+}

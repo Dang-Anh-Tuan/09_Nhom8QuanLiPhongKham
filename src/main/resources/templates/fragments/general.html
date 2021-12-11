@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="html_head(type)" th:remove="${type}">
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link
+      rel="stylesheet"
+      th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css}"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/grid.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/admin-header.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/admin-sidebar.css}">
+</head>
+<body>
+    <!--  ---------------------- MENU ----------------------- -->
+    <div th:fragment="menu">
+    <nav  class="nav-bar">
+      <div class="nav-bar__logo">Logo</div>
+      <div class="nav-bar__user">
+        <div class="user__contain-avatar"></div>
+        <p th:text="${session.username}" class="user__name"></p>
+        <div class="user__btn-extra"><i class="fas fa-sort-down"></i></div>
+        <div class="user__sub-nav">
+            <div class="user__sub-nav-item">
+                <a href="/logout" class="user__logout-btn">Log out</a>
+            </div>
+        </div>
+      </div>
+    </nav>
+    </div>
+	
+    
+    <!--  ----------------------END MENU ----------------------- -->
+        
+</body>
+</html>

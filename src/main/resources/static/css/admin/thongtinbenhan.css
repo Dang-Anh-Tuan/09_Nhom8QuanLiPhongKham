@@ -1,0 +1,24 @@
+.info-benhan-row  {
+  margin-left: 8px;
+  margin-top: 10px;
+}
+
+.info-benhan-field__container-cell {
+  width: 20%;
+  padding: 2px 8px;
+  
+}
+
+.cell--background-primary{
+    background: var(--primary-color);
+}
+
+.cell--white-text{
+    color: var(--white-color);
+}
+
+.info-benhan-field__content{
+    margin-left: 20px;
+    margin-bottom : 0;
+    font-size: 1.6rem;
+}
